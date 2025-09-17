@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: rapidaid-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        fromDatabase:
+          name: rapidaid-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRE
+        value: 7d
+      - key: EMAIL_HOST
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: 587
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: FRONTEND_URL
+        value: https://your-frontend-domain.onrender.com
+      - key: ADMIN_FRONTEND_URL
+        value: https://your-admin-frontend-domain.onrender.com
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 100
+      - key: ADMIN_EMAIL
+        value: admin@rapidaid.com
+      - key: ADMIN_PASSWORD
+        value: admin123
+
+databases:
+  - name: rapidaid-db
+    plan: free
+    databaseName: rapidaid
