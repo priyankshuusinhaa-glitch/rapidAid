@@ -1,0 +1,302 @@
+.about-section {
+    text-align: center;
+    padding: 90px 20px;
+    background: linear-gradient(to top, #fbe6e6, #fcf5f5);
+    
+  }
+  
+  .about-title {
+    font-size: 38px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .about-text {
+    max-width: 850px;
+    margin: 0 auto 40px;
+    color: #686262;
+    font-size: 16px;
+    line-height: 1.8;
+word-spacing: 6px;
+  }
+  
+  /* Stats */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 190px;
+    margin-bottom: 60px;
+  }
+  
+  .stat-item h3 {
+    font-size: 40px;
+    color: #f30317;
+    margin-bottom: 5px;
+  }
+  
+  .stat-item p {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .star {
+    color: red;
+  }
+  
+  /* Mission */
+  .mission {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 100px auto;
+    text-align: left;
+  }
+  
+  .mission-text {
+    flex: 1.4;
+  }
+  
+  .mission-text h2 {
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+  
+  .mission-text p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  
+  .mission-list {
+    list-style: none;
+    padding: 5px;
+    line-height: 1.8;
+  }
+  
+  .mission-list li {
+    font-size: 16px;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  .mission-list li::before {
+    content: "✔ ";
+    color: #e63946;
+    font-weight: bold;
+  }
+  
+  .mission-image {
+    flex: 1;
+  }
+  
+  .mission-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  /* --- Existing styles remain unchanged --- */
+
+/* Core Values Section */
+.core-values {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f9fafb;
+    margin-top: 60px;
+  }
+  
+  .core-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .core-subtitle {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    font-size: 19px;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  /* Values Grid */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .value-card {
+    /* height: ; */
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+  }
+  
+  .value-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  .value-card .icon {
+    font-size: 28px;
+    background: #ffeaea;
+    color: #e63946;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .value-card h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #100f0f;
+  }
+  
+  .value-card p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    word-spacing:5px ;
+  }
+  /* Leadership Section */
+.leadership {
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 0px;
+  }
+  
+  .leadership-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .leadership-subtitle {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  /* Team Grid */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  /* Team Card */
+  .team-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .team-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .team-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+  }
+  
+  .team-card h3 {
+    margin: 15px 13px 13px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #222;
+  }
+  
+  .team-card .role {
+    color: #e63946;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 13px;
+  }
+  
+  .team-card .exp {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  .commitment {
+    background-color: #e21b2c; /* Red background */
+    color: #f1dfdf;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  
+  .commitment-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fbf7f7;
+    margin-bottom: 15px;
+  }
+  
+  .commitment-text {
+    max-width: 800px;
+    margin: 0 auto 50px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  /* Cards Container */
+  .commitment-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  /* Each Card */
+  .card {
+    text-align: center;
+  }
+  
+  .icon-circle {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon {
+    font-size: 28px;
+  }
+  
+  .card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .card p {
+    font-size: 14px;
+    color: #f0f0f0;
+  }
+  
+  
