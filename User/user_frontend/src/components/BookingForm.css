@@ -1,0 +1,132 @@
+.booking-container {
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin-top: 80px;
+  }
+  
+  .steps {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 15px;
+  }
+  
+  .steps span {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  .steps .active {
+    background: #e63946;
+    color: white;
+  }
+  
+  .card {
+    background: #fff;
+    padding:50px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    text-align: left;
+  }
+  .card-p{
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .emergency-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+  }
+  
+  .option-card {
+    border: 2px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+  }
+  
+  .option-card:hover {
+    border-color: #e63946;
+    
+}
+h3 {
+    text-align: center;
+}
+.card-p{
+text-align: center;
+}
+
+.option-card.selected {
+    border-color: #e63946;
+    background-color: #e63946;
+    color: #fff;
+  }
+  
+  input, textarea {
+    width: 100%;
+    margin: 8px 0 15px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  textarea {
+    min-height: 80px;
+  }
+  
+  .info-box {
+    background: #eaf4ff;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .warning-box {
+    background: #fff3cd;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .form-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  button {
+    padding: 10px 18px;
+    
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  button[type="button"] {
+    background: #ddd;
+  }
+  
+  button[type="submit"], .form-nav button:last-child {
+    background: #e63946;
+    color: white;
+  }
+  

@@ -1,0 +1,73 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 25px;
+    background: rgb(240, 237, 237);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .plus {
+    color: red;
+    margin-right: 4px;
+  }
+  
+  .brand {
+    color: rgb(232, 12, 12);
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding-right: 170px;
+  }
+  
+  .nav-links a {
+    color: #383636;
+    text-decoration: none;
+  }
+  
+  .nav-links a:hover {
+    color: red;
+  }
+  
+  .btn-outline {
+    padding: 8px 16px;
+    border: 1px solid red;
+    background: transparent;
+    color: red;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .btn-outline:hover {
+    background: red;
+    color: white;
+  }
+  
+  .btn-primary {
+    padding: 8px 16px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background: darkred;
+  }
+  

@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+  }
+  
+  .signin-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .signin-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+  }
+  
+  .signin-logo {
+    font-size: 32px;
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .tab-buttons {
+    display: flex;
+    margin-bottom: 20px;
+    border-radius: 25px;
+    overflow: hidden;
+    background: #f1f1f1;
+  }
+  
+  .tab-buttons button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    background: transparent;
+  }
+  
+  .tab-buttons .active {
+    background: #fff;
+    color: red;
+    border: 1px solid #ddd;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  
+  .forgot-link {
+    color: red;
+    text-decoration: none;
+  }
+  
+  .signin-btn {
+    width: 100%;
+    padding: 12px;
+    background: red;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .signin-btn:hover {
+    background: darkred;
+  }
+  
+  .signup-text {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .signup-text a {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
