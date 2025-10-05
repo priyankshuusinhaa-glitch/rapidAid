@@ -3,52 +3,31 @@ const {
   getDrivers,
   getDriverById,
   createDriver,
-  updateDriver,
+  updateDriverProfile,
   deleteDriver,
   toggleDriverStatus,
-  getDriverPerformance
+  getDriverEarningsSummary,
+  getDriverPerformanceMetrics
 } = require('../controllers/driverController');
 const auth = require('../middlewares/auth');
 const { isManager } = require('../middlewares/role');
-
 const router = express.Router();
-
-// All routes require authentication
+//  All routes require authentication
 router.use(auth);
-
-// @route   GET /api/drivers
-// @desc    Get all drivers
-// @access  Private (Manager+)
+//  Get all drivers
 router.get('/', isManager, getDrivers);
-
-// @route   GET /api/drivers/:id
-// @desc    Get driver by ID
-// @access  Private (Manager+)
+//  Get driver by ID
 router.get('/:id', isManager, getDriverById);
-
-// @route   POST /api/drivers
-// @desc    Create driver
-// @access  Private (Manager+)
+//  Create driver (Manager only)
 router.post('/', isManager, createDriver);
-
-// @route   PUT /api/drivers/:id
-// @desc    Update driver
-// @access  Private (Manager+)
-router.put('/:id', isManager, updateDriver);
-
-// @route   DELETE /api/drivers/:id
-// @desc    Delete driver
-// @access  Private (Manager+)
+//  Update driver profile (driver self or manager)
+router.patch('/:id/profile', updateDriverProfile);
+//  Delete driver
 router.delete('/:id', isManager, deleteDriver);
-
-// @route   PATCH /api/drivers/:id/status
-// @desc    Toggle driver status
-// @access  Private (Manager+)
+//  Toggle driver status (Manager only)
 router.patch('/:id/status', isManager, toggleDriverStatus);
-
-// @route   GET /api/drivers/:id/performance
-// @desc    Get driver performance
-// @access  Private (Manager+)
-router.get('/:id/performance', isManager, getDriverPerformance);
+//  Driver earnings / summary
+router.get('/:id/earnings', getDriverEarningsSummary);
+router.get('/:id/performance', getDriverPerformanceMetrics);
 
 module.exports = router;

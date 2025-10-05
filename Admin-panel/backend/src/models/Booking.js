@@ -33,6 +33,20 @@ const bookingSchema = new mongoose.Schema({
     default: 'pending' 
   },
 
+  // ⚡ New Fields for extended functionality
+  rating: { type: Number, min: 1, max: 5 }, // Feedback system
+  feedback: { type: String }, // Customer comments
+  cancellationReason: { type: String }, // For cancellation API
+  isRefunded: { type: Boolean, default: false }, // Refund flag
+
+  customerNotes: { type: String }, // Notes like “patient has oxygen support”
+  medicalRequirements: { type: String }, // Special requirements
+  emergencyContact: {
+    name: { type: String },
+    phone: { type: String },
+    relation: { type: String }
+  },
+
   // GeoJSON + optional formatted address for UX
   pickupLocation: {
     type: { type: String, enum: ['Point'], default: 'Point' },
@@ -45,12 +59,13 @@ const bookingSchema = new mongoose.Schema({
     address: { type: String }
   },
 
-  // Admin overrides when needed
+  // Admin overrides
   overrides: {
     baseFare: { type: Number },
     perKmRate: { type: Number },
     emergencyMultiplier: { type: Number },
   }
+
 }, { timestamps: true });
 
 bookingSchema.index({ pickupLocation: '2dsphere' });
