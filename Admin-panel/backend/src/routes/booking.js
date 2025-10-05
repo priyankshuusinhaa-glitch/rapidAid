@@ -2,8 +2,6 @@ const express = require("express");
 const auth = require("../middlewares/auth");
 const { isManager } = require("../middlewares/role");
 const {
-  getBookings,
-  updateBookingByAdmin,
   createBooking,
   getUserBookings,
   getTripHistory,
@@ -11,18 +9,31 @@ const {
   getTripSummary,
   cancelBooking,
   addFeedback,
-  updateBookingDetails
+  updateBookingDetails,
+  getBookings,
+  updateBookingByAdmin,
+  getBookingStats
 } = require("../controllers/bookingController");
 const router = express.Router();
+
+// ───────────────────────────────
+//  PUBLIC ROUTES
+// ───────────────────────────────
+
+// Create a new booking (no auth needed)
 router.post("/create", createBooking);
+router.post("/fare-estimate", getFareEstimate);
+//  AUTHENTICATED USER ROUTES
+// ───────────────────────────────
 router.use(auth);
-router.get("/user/:userId", getUserBookings); 
-router.get("/history", getTripHistory); // ✅ Trip history (paginated)
-router.get("/summary/:bookingId", getTripSummary); // ✅ Trip summary
-router.patch("/update/:id", updateBookingDetails); // ✅ Update notes / medical info
-router.patch("/cancel/:id", cancelBooking); // ✅ Cancel booking
-router.post("/feedback/:id", addFeedback); 
-router.post("/fare-estimate", getFareEstimate); 
-router.get("/booking", isManager, getBookings);
-router.patch("/updatebooking/:id", isManager, updateBookingByAdmin);
+router.get("/user/:userId", getUserBookings);
+router.get("/history", getTripHistory);
+router.get("/summary/:bookingId", getTripSummary);
+router.patch("/update/:id", updateBookingDetails);
+router.patch("/cancel/:id", cancelBooking);
+router.post("/feedback/:id", addFeedback);
+router.get("/all", isManager, getBookings);
+router.patch("/admin/update/:id", isManager, updateBookingByAdmin);
+router.get("/stats", isManager, getBookingStats);
+
 module.exports = router;
