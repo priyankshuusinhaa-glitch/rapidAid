@@ -293,8 +293,169 @@ const getBookingStats = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+ const getTripHistory = async (req, res) => {
+  try {
+    const { page = 1, limit = 10 } = req.query;
+    const userId = req.user._id;
 
+    const bookings = await Booking.find({ userId, status: 'completed' })
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit))
+      .populate('driverId', 'name email')
+      .populate('ambulanceId', 'plateNumber');
 
-module.exports = { createBooking, getBookings, updateBookingByAdmin, getUserBookings ,getBookingStats  };
+    const total = await Booking.countDocuments({ userId, status: 'completed' });
+
+    res.status(200).json({
+      total,
+      currentPage: parseInt(page),
+      totalPages: Math.ceil(total / limit),
+      bookings
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+const getFareEstimate = async (req, res) => {
+  try {
+    const { pickupAddress, dropAddress, emergencyLevel } = req.body;
+
+    if (!pickupAddress || !dropAddress || !emergencyLevel) {
+      return res.status(400).json({ error: 'pickupAddress, dropAddress, and emergencyLevel are required' });
+    }
+
+    const [pickupGeo, dropGeo] = await Promise.all([
+      geocoder.geocode(pickupAddress),
+      geocoder.geocode(dropAddress)
+    ]);
+
+    const toRad = (v) => (v * Math.PI) / 180;
+    const R = 6371;
+    const dLat = toRad(dropGeo[0].latitude - pickupGeo[0].latitude);
+    const dLon = toRad(dropGeo[0].longitude - pickupGeo[0].longitude);
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(toRad(pickupGeo[0].latitude)) *
+        Math.cos(toRad(dropGeo[0].latitude)) *
+        Math.sin(dLon / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distanceKm = Math.max(0.5, Number((R * c).toFixed(2)));
+
+    const { estimatedFare, breakdown } = await calculateFare({
+      distanceKm,
+      emergencyLevel,
+    });
+
+    res.json({ distanceKm, estimatedFare, breakdown });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+  const getTripSummary = async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+    const booking = await Booking.findById(bookingId)
+      .populate('userId', 'name email')
+      .populate('driverId', 'name email')
+      .populate('ambulanceId', 'plateNumber');
+
+    if (!booking) return res.status(404).json({ error: 'Booking not found' });
+
+    const summary = {
+      bookingId: booking._id,
+      user: booking.userId,
+      driver: booking.driverId,
+      distance: booking.distanceKm,
+      estimatedFare: booking.estimatedFare,
+      actualFare: booking.actualFare || booking.estimatedFare,
+      status: booking.status,
+      rating: booking.rating,
+      feedback: booking.feedback,
+      createdAt: booking.createdAt,
+      completedAt: booking.updatedAt
+    };
+
+    res.json({ summary });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+ const cancelBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { reason } = req.body;
+
+    const booking = await Booking.findById(id);
+    if (!booking) return res.status(404).json({ error: 'Booking not found' });
+
+    if (booking.status === 'completed') {
+      return res.status(400).json({ error: 'Cannot cancel completed bookings' });
+    }
+
+    booking.status = 'cancelled';
+    booking.cancellationReason = reason || 'No reason provided';
+    booking.isRefunded = true; // Optional: integrate payment later
+    await booking.save();
+
+    res.json({ message: 'Booking cancelled successfully', booking });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+  const addFeedback = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rating, feedback } = req.body;
+
+    const booking = await Booking.findById(id);
+    if (!booking) return res.status(404).json({ error: 'Booking not found' });
+    if (booking.status !== 'completed') {
+      return res.status(400).json({ error: 'Can only rate completed bookings' });
+    }
+
+    booking.rating = rating;
+    booking.feedback = feedback;
+    await booking.save();
+
+    res.json({ message: 'Feedback submitted successfully', booking });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+    const updateBookingDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { customerNotes, medicalRequirements, emergencyContact } = req.body;
+
+    const booking = await Booking.findById(id);
+    if (!booking) return res.status(404).json({ error: 'Booking not found' });
+
+    if (booking.status !== 'pending') {
+      return res.status(400).json({ error: 'Can only modify pending bookings' });
+    }
+
+    if (customerNotes) booking.customerNotes = customerNotes;
+    if (medicalRequirements) booking.medicalRequirements = medicalRequirements;
+    if (emergencyContact) booking.emergencyContact = emergencyContact;
+
+    await booking.save();
+    res.json({ message: 'Booking updated successfully', booking });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { createBooking,
+   getBookings,
+   updateBookingByAdmin,
+    getUserBookings ,
+    getBookingStats,
+    getTripHistory,
+  getFareEstimate,
+  getTripSummary,
+  cancelBooking,
+  addFeedback,
+  updateBookingDetails  };
 
 
